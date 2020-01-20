@@ -12,7 +12,7 @@
 # sudo apt autoremove --purge && sudo apt-get autoclean
 
 # Install additionals
-# sudo apt install -y build-essential elixir git nodejs postgresql screen
+# sudo apt install -y build-essential elixir git nodejs postgresql
 
 # Install mix
 # mix local.hex --force

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo WLAN-Config
 read -p 'PI-HOST: ' HOST
 read -p 'PI-PORT: ' PORT
 

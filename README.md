@@ -19,3 +19,8 @@
 4. Configure access & upload remote-script
 
 - `./pi_local.sh`
+
+5. Execute remote-script
+
+- ssh -p PORT pi@HOST
+- `./pi_remote.sh`

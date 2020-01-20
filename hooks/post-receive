@@ -1,0 +1,20 @@
+#!/bin/bash
+TARGET="/home/pi/builds/spacegame"
+GIT_DIR="/home/pi/repos/spacegame.git"
+BRANCH="master"
+
+while read oldrev newrev ref
+do
+  # only checking out the master (or whatever branch you would like to deploy)
+  if [ "$ref" = "refs/heads/$BRANCH" ];
+    then
+      echo "Ref $ref received. Deploying ${BRANCH} branch to production..."
+      git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
+      mix deps.get
+      npm ci --prefix assets
+      #mix ecto.reset
+      #mix ecto.migrate # switch reset to migrate later on
+    else
+      echo "Ref $ref received. Doing nothing: only the ${BRANCH} branch will be deployed"
+    fi
+done

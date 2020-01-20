@@ -4,10 +4,10 @@ echo WLAN-Config
 read -p 'WLAN-SSID: ' WLANSSID
 read -p 'Password: ' WLANPASS
 
-volume=/Volumes/boot
+VOLUME=/Volumes/boot
 
-touch $volume/ssh
-touch $volume/wpa_supplicant.conf
+touch $VOLUME/ssh
+touch $VOLUME/wpa_supplicant.conf
 
 /bin/cat <<EOM >$volume/wpa_supplicant.conf
 country=DE

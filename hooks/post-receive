@@ -1,6 +1,9 @@
 #!/bin/bash
-TARGET="/home/pi/builds/spacegame"
-GIT_DIR="/home/pi/repos/spacegame.git"
+
+REPOSITORY=spacegame
+
+TARGET="/home/pi/builds/$REPOSITORY"
+GIT_DIR="/home/pi/repos/$REPOSITORY.git"
 BRANCH="master"
 
 while read oldrev newrev ref

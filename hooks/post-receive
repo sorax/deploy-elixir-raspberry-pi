@@ -13,8 +13,8 @@ do
     then
       echo "Ref $ref received. Deploying ${BRANCH} branch to production..."
       git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
-      mix deps.get
-      npm ci --prefix assets
+      #mix deps.get
+      #npm ci --prefix assets
       #mix ecto.reset
       #mix ecto.migrate # switch reset to migrate later on
     else

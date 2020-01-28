@@ -1,7 +1,8 @@
 #!/bin/bash
 
-read -p 'PI-HOST: ' HOST
-read -p 'PI-PORT: ' PORT
+echo "WLAN-Config"
+read -p "WLAN-SSID: " WLANSSID
+read -p "Password: " WLANPASS
 
 echo "#############################"
 echo "# When asked for a password #"

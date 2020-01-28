@@ -22,5 +22,5 @@
 
 5. Execute remote-script
 
-- ssh -p PORT pi@HOST
-- `./pi_remote.sh`
+- `ssh -p PORT pi@HOST`
+- `screen -dm ./pi_remote.sh`

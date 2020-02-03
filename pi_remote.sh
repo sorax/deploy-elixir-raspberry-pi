@@ -21,6 +21,7 @@ sudo apt install -y certbot elixir git nodejs postgresql
 
 # Install mix
 mix local.hex --force
+mix local.rebar --force
 
 # Fix npm 
 mkdir -p ~/.npm-global
@@ -30,6 +31,8 @@ source ~/.profile
 
 # Start postgres
 sudo systemctl start postgresql
+sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+sudo -u postgres psql -c "CREATE DATABASE $REPOSITORY;"
 
 # Create directories
 mkdir -p www/$REPOSITORY
@@ -42,7 +45,8 @@ mv post-receive repos/$REPOSITORY.git/hooks
 chmod +x repos/$REPOSITORY.git/hooks/post-receive
 
 # Create https certificate
-sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
+#sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
+#sudo certbot renew
 
 # Create & enable swap
 #sudo fallocate -l 1G /tmp/swapfile

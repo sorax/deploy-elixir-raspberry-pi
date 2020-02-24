@@ -1,9 +1,6 @@
 #!/bin/bash
 
-echo "Config"
-read -p "Repository: " REPOSITORY
-read -p "Domain: " DOMAIN
-read -p "E-Mail: " MAIL
+. setup.cfg
 
 # Add additional sources
 echo "deb https://packages.erlang-solutions.com/debian buster contrib" | sudo tee /etc/apt/sources.list.d/erlang-solutions.list
@@ -17,7 +14,7 @@ sudo apt dist-upgrade -y
 sudo apt autoremove --purge && sudo apt-get autoclean
 
 # Install additionals
-sudo apt install -y certbot elixir git nodejs postgresql
+sudo apt install -y elixir git nodejs postgresql
 
 # Install mix
 mix local.hex --force
@@ -44,9 +41,13 @@ git init --bare repos/$REPOSITORY.git
 mv post-receive repos/$REPOSITORY.git/hooks
 chmod +x repos/$REPOSITORY.git/hooks/post-receive
 
-# Create https certificate
-#sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
-#sudo certbot renew
+if [[ $HTTPS =~ ^[Yy]$ ]]; then
+  # Create https certificate
+  sudo apt install -y certbot
+  sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
+  sudo certbot renew
+fi
+
 
 # Create & enable swap
 #sudo fallocate -l 1G /tmp/swapfile

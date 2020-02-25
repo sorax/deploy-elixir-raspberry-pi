@@ -20,8 +20,6 @@ ssh-copy-id -p $PORT pi@$HOST
 ssh -T -p $PORT pi@$HOST sudo passwd -l pi
 
 scp -P $PORT hooks/post-receive pi@$HOST:/home/pi
-scp -P $PORT pi_remote.sh pi@$HOST:/home/pi
-ssh -T -p $PORT pi@$HOST chmod +x pi_remote.sh
 
 ssh -T -p $PORT pi@$HOST << EOSSH
 touch setup.cfg
@@ -33,5 +31,7 @@ MAIL=$MAIL
 EOM
 EOSSH
 
+scp -P $PORT pi_remote.sh pi@$HOST:/home/pi
+ssh -T -p $PORT pi@$HOST chmod +x pi_remote.sh
 ssh -T -p $PORT pi@$HOST sudo apt install -y screen
 ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh

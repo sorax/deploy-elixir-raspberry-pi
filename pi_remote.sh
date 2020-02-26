@@ -48,7 +48,6 @@ if [[ $HTTPS =~ ^[Yy]$ ]]; then
   sudo certbot renew
 fi
 
-
 # Create & enable swap
 #sudo fallocate -l 1G /tmp/swapfile
 #sudo chmod 600 /tmp/swapfile
@@ -58,3 +57,5 @@ fi
 # Disable & delete swap
 #sudo swapoff /tmp/swapfile
 #sudo rm /tmp/swapfile
+
+mv setup.cfg setup_done.cfg

@@ -14,7 +14,7 @@ sudo apt full-upgrade -y
 sudo apt autoremove --purge && sudo apt autoclean
 
 # Install additionals
-# sudo apt install -y elixir git nodejs postgresql
+# sudo apt install -y elixir nodejs postgresql
 sudo apt install -y elixir postgresql
 
 # Install mix
@@ -32,22 +32,16 @@ sudo systemctl start postgresql
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 # sudo -u postgres psql -c "CREATE DATABASE $REPOSITORY;"
 
-# # Create directories
-# mkdir -p www/$REPOSITORY
-# mkdir -p builds/$REPOSITORY
-# mkdir -p repos/$REPOSITORY.git
+# Create directories
+mkdir -p releases
+mkdir -p www
 
-# # Init git + hooks
-# git init --bare repos/$REPOSITORY.git
-# mv post-receive repos/$REPOSITORY.git/hooks
-# chmod +x repos/$REPOSITORY.git/hooks/post-receive
-
-# if [[ $HTTPS =~ ^[Yy]$ ]]; then
-#   # Create https certificate
-#   sudo apt install -y certbot
-#   sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
-#   sudo certbot renew
-# fi
+if [[ $HTTPS =~ ^[Yy]$ ]]; then
+  # Create https certificate
+  sudo apt install -y certbot
+  sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
+  sudo certbot renew
+fi
 
 # # Create & enable swap
 # #sudo fallocate -l 1G /tmp/swapfile
@@ -59,4 +53,4 @@ sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 # #sudo swapoff /tmp/swapfile
 # #sudo rm /tmp/swapfile
 
-# mv setup.cfg setup_done.cfg
+mv setup.cfg setup_done.cfg

@@ -32,4 +32,4 @@ EOSSH
 scp -P $PORT pi_remote.sh pi@$HOST:/home/pi
 ssh -T -p $PORT pi@$HOST chmod +x pi_remote.sh
 ssh -T -p $PORT pi@$HOST sudo apt install -y screen
-# ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh
+ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh

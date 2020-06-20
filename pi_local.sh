@@ -2,7 +2,8 @@
 
 read -p "PI-HOST: " HOST
 read -p "PI-PORT: " PORT
-read -p "git repo name: " REPOSITORY
+read -p "git user name: " GIT_USER
+read -p "git repo name: " GIT_REPO
 read -p "use https? (Yn) " -n 1 HTTPS
 if [[ $HTTPS =~ ^[Nn]$ ]]; then
   echo ""
@@ -22,7 +23,8 @@ ssh -T -p $PORT pi@$HOST sudo passwd -l pi
 ssh -T -p $PORT pi@$HOST << EOSSH
 touch setup.cfg
 /bin/cat <<EOM >setup.cfg
-REPOSITORY=$REPOSITORY
+GIT_USER=$GIT_USER
+GIT_REPO=$GIT_REPO
 HTTPS=$HTTPS
 DOMAIN=$DOMAIN
 MAIL=$MAIL

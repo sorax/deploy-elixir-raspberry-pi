@@ -25,6 +25,7 @@ touch setup.cfg
 /bin/cat <<EOM >setup.cfg
 GIT_USER=$GIT_USER
 GIT_REPO=$GIT_REPO
+CUR_VERSION=NONE
 HTTPS=$HTTPS
 DOMAIN=$DOMAIN
 MAIL=$MAIL
@@ -32,6 +33,8 @@ EOM
 EOSSH
 
 scp -P $PORT pi_remote.sh pi@$HOST:/home/pi
+scp -P $PORT pull.sh pi@$HOST:/home/pi
 ssh -T -p $PORT pi@$HOST chmod +x pi_remote.sh
+ssh -T -p $PORT pi@$HOST chmod +x pull.sh
 ssh -T -p $PORT pi@$HOST sudo apt install -y screen
 ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh

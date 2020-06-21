@@ -15,7 +15,7 @@ sudo apt autoremove --purge && sudo apt autoclean
 
 # Install additionals
 # sudo apt install -y elixir nodejs postgresql
-sudo apt install -y elixir postgresql
+sudo apt install -y elixir inotify-tools postgresql
 
 # Install mix
 mix local.hex --force
@@ -30,11 +30,10 @@ mix local.rebar --force
 # Start postgres
 sudo systemctl start postgresql
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
-# sudo -u postgres psql -c "CREATE DATABASE $REPOSITORY;"
+sudo -u postgres psql -c "CREATE DATABASE $REPOSITORY;"
 
 # Create directories
 mkdir -p releases
-mkdir -p www
 
 if [[ $HTTPS =~ ^[Yy]$ ]]; then
   # Create https certificate
@@ -53,4 +52,4 @@ fi
 # #sudo swapoff /tmp/swapfile
 # #sudo rm /tmp/swapfile
 
-mv setup.cfg setup_done.cfg
+# mv setup.cfg setup_done.cfg

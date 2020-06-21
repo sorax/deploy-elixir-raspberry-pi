@@ -27,6 +27,7 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
 
   mix deps.get --only prod
   #mix test
+  #mix ecto.migrate
 
   MIX_ENV=prod mix release
 

@@ -27,22 +27,24 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
   export PORT=443
   export SSL_KEY_PATH=/etc/letsencrypt/live/sorax.net/privkey.pem
   export SSL_CERT_PATH=/etc/letsencrypt/live/sorax.net/fullchain.pem
+  export MIX_ENV=prod
 
   mix deps.get --only prod
+  mix compile
+  mix phx.digest
 
   if [ "$CUR_VERSION" == "NONE" ]; then
     sudo -u postgres psql -c "CREATE DATABASE $REPOSITORY;"
     mix ecto.setup
-  else
-    mix ecto.migrate
   fi
 
-  mix phx.digest
-  MIX_ENV=prod mix release
+  mix ecto.migrate
+  mix release
 
   #sudo releases/"$CUR_VERSION"/_build/prod/rel/"$GIT_REPO"/bin/"$GIT_REPO" stop
 
   #sudo _build/prod/rel/$GIT_REPO/bin/$GIT_REPO start
+  #sudo _build/prod/rel/$GIT_REPO/bin/$GIT_REPO start_iex
   #sudo _build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon
 
   ## set cur_version = new version

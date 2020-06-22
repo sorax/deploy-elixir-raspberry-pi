@@ -23,9 +23,9 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
 
   export DATABASE_URL=ecto://postgres:postgres@localhost/$GIT_REPO
   export SECRET_KEY_BASE=pxsjyQAT2P+ZqvSxmbc4x5JkonQstRITaSeMgCQqHIoDREH47dhgpMEIXUd2nlED
-  ## POOL_SIZE: 10
-  ## PORT: 80
-  ## PORT: 443
+  export POOL_SIZE=10
+  ## export PORT=80
+  export PORT=443
 
   #mix deps.get --only prod
   ## mix ecto.migrate

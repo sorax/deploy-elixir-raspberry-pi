@@ -30,8 +30,7 @@ mkdir -p releases
 # Create https certificate
 sudo apt install -y certbot
 sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
-#sudo certbot renew
 
 # Create cronjobs
-# create cron-job for renew certbot
-# create cron-job for ./pull.sh
+#(crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
+(crontab -l ; echo "0 * * * * sudo ./pull.sh") | crontab -

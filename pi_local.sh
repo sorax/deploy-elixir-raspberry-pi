@@ -4,14 +4,8 @@ read -p "PI-HOST: " HOST
 read -p "PI-PORT: " PORT
 read -p "git user name: " GIT_USER
 read -p "git repo name: " GIT_REPO
-read -p "use https? (Yn) " -n 1 HTTPS
-if [[ $HTTPS =~ ^[Nn]$ ]]; then
-  echo ""
-else
-  echo ""
-  read -p "Domain: " DOMAIN
-  read -p "E-Mail: " MAIL
-fi
+read -p "Domain: " DOMAIN
+read -p "E-Mail: " MAIL
 echo "#############################"
 echo "When asked for a password"
 echo "Type in: raspberry"
@@ -26,7 +20,6 @@ touch setup.cfg
 GIT_USER=$GIT_USER
 GIT_REPO=$GIT_REPO
 CUR_VERSION=NONE
-HTTPS=$HTTPS
 DOMAIN=$DOMAIN
 MAIL=$MAIL
 EOM

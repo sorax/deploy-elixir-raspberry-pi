@@ -43,7 +43,7 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
 
   cd ../..
 
-  # Shutdown old version
+  # Shutdown old version or noop
   sudo releases/"$CUR_VERSION"/_build/prod/rel/"$GIT_REPO"/bin/"$GIT_REPO" stop || :
 
   # Start new version

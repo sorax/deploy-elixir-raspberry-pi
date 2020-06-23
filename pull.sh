@@ -44,7 +44,7 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
   cd ../..
 
   # Shutdown old version
-  sudo releases/"$CUR_VERSION"/_build/prod/rel/"$GIT_REPO"/bin/"$GIT_REPO" stop
+  sudo releases/"$CUR_VERSION"/_build/prod/rel/"$GIT_REPO"/bin/"$GIT_REPO" stop || :
 
   # Start new version
   sudo releases/"$NEW_VERSION"/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon

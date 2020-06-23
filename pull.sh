@@ -21,6 +21,7 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
   tar -xvf "$NEW_VERSION".tar.gz --strip 1
   unzip static.zip
 
+  # Set env vars
   export DATABASE_URL=ecto://postgres:postgres@localhost/$GIT_REPO
   export SECRET_KEY_BASE=pxsjyQAT2P+ZqvSxmbc4x5JkonQstRITaSeMgCQqHIoDREH47dhgpMEIXUd2nlED
   export POOL_SIZE=10
@@ -40,13 +41,16 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
   mix ecto.migrate
   mix release
 
-  #sudo releases/"$CUR_VERSION"/_build/prod/rel/"$GIT_REPO"/bin/"$GIT_REPO" stop
+  cd ../..
 
-  #sudo _build/prod/rel/$GIT_REPO/bin/$GIT_REPO start
-  #sudo _build/prod/rel/$GIT_REPO/bin/$GIT_REPO start_iex
-  #sudo _build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon
+  # Shutdown old version
+  sudo releases/"$CUR_VERSION"/_build/prod/rel/"$GIT_REPO"/bin/"$GIT_REPO" stop
 
-  ## set cur_version = new version
+  # Start new version
+  sudo releases/"$NEW_VERSION"/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon
+
+  # Update version in setup.cfg
+  sed -i "/CUR_VERSION=.*/c\CUR_VERSION=$NEW_VERSION" setup.cfg
 else
   echo Latest version already installed
 fi

@@ -32,5 +32,5 @@ sudo apt install -y certbot
 sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN -m $MAIL --redirect
 
 # Create cronjobs
-#(crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
+(crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
 (crontab -l ; echo "0 * * * * sudo ./pull.sh") | crontab -

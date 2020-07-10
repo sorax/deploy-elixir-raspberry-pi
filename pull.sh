@@ -25,8 +25,8 @@ if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
   export DATABASE_URL=ecto://postgres:postgres@localhost/$GIT_REPO
   export SECRET_KEY_BASE=pxsjyQAT2P+ZqvSxmbc4x5JkonQstRITaSeMgCQqHIoDREH47dhgpMEIXUd2nlED
   export POOL_SIZE=10
-  export SSL_KEY_PATH=/etc/letsencrypt/live/sorax.net/privkey.pem
-  export SSL_CERT_PATH=/etc/letsencrypt/live/sorax.net/fullchain.pem
+  export SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+  export SSL_CERT_PATH=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
   export MIX_ENV=prod
 
   mix deps.get --only prod

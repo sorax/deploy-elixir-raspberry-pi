@@ -10,7 +10,7 @@ sudo apt-key add erlang_solutions.asc
 # Update & upgrade system
 sudo apt update && sudo apt upgrade -y
 sudo apt full-upgrade -y
-sudo apt autoremove --purge && sudo apt autoclean -y
+sudo apt autoremove --purge -y && sudo apt autoclean -y
 
 # Install additionals
 sudo apt install -y elixir inotify-tools postgresql

@@ -1,0 +1,5 @@
+# The directory with the raspios image
+/images/
+
+# The directory for your stored config
+/data/

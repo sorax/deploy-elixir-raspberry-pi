@@ -58,7 +58,7 @@ function setup_remote {
   ssh -T -p $PORT pi@$HOST chmod +x pi_remote.sh
   ssh -T -p $PORT pi@$HOST chmod +x pull.sh
   ssh -T -p $PORT pi@$HOST sudo apt install -y screen
-  # ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh
+  ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh
 }
 
 if [ ! -f "$CONFIG" ]; then

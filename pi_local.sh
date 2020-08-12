@@ -22,6 +22,7 @@ function get_config {
     read -p "Domain: " HTTPS_DOMAIN
     read -p "E-Mail: " HTTPS_MAIL
   fi
+  read -p "SECRET_KEY_BASE: (e.g. use mix phx.gen.secret)" SECRET_KEY_BASE
 }
 
 function store_config {
@@ -34,6 +35,7 @@ GIT_URL=$GIT_URL
 HTTPS=$HTTPS
 HTTPS_DOMAIN=$HTTPS_DOMAIN
 HTTPS_MAIL=$HTTPS_MAIL
+SECRET_KEY_BASE=$SECRET_KEY_BASE
 CUR_VERSION=NONE
 EOM
 }

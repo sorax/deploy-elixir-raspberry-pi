@@ -7,14 +7,29 @@ sudo apt update && sudo apt upgrade -y
 sudo apt full-upgrade -y
 sudo apt autoremove --purge -y && sudo apt autoclean -y
 
-# Download packages
-mkdir -p deb
-wget -P deb https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.1.6-1~raspbian~buster_armhf.deb
-wget -P deb https://packages.erlang-solutions.com/erlang/debian/pool/elixir_1.8.1-1~raspbian~stretch_armhf.deb
+# Install additionals
+sudo apt install -y build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
+sudo apt install -y curl git
+sudo apt install -y inotify-tools postgresql
 
-# Install packages
-sudo apt install -y /home/pi/deb/esl-erlang_22.1.6-1~raspbian~buster_armhf.deb
-sudo apt install -y /home/pi/deb/elixir_1.8.1-1~raspbian~stretch_armhf.deb
+# Install asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0-rc1
+
+# Add to shell
+echo -e "\n# Add asdf bash completions" >> ~/.bashrc
+echo ". \$HOME/.asdf/asdf.sh" >> ~/.bashrc
+echo ". \$HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+. ~/.bashrc
+
+# Add asdf plugins
+asdf plugin add erlang
+asdf plugin add elixir
+asdf install erlang latest
+asdf install elixir latest
+
+# Set asdf global versions
+asdf global elixir 1.10.4-otp-23
+asdf global erlang 23.0.3
 
 # Install additionals
 sudo apt install -y inotify-tools postgresql
@@ -22,7 +37,6 @@ sudo apt install -y inotify-tools postgresql
 # Start postgres
 sudo systemctl start postgresql
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
-#sudo -u postgres psql -c "CREATE DATABASE $REPOSITORY;"
 
 # Install mix
 mix local.hex --force
@@ -31,10 +45,18 @@ mix local.rebar --force
 # Create directories
 mkdir -p releases
 
-if [[ $HTTPS = "true" ]]; then
+if [[ "$HTTPS" == "true" ]]; then
   # Create https certificate
-  #sudo apt install -y certbot
-  #sudo certbot certonly --standalone -d $HTTPS_DOMAIN -d www.$HTTPS_DOMAIN -m $HTTPS_MAIL --redirect
+  sudo apt install -y certbot
+  sudo certbot certonly --standalone --agree-tos --no-eff-email -d $HTTPS_DOMAIN -d www.$HTTPS_DOMAIN -m $HTTPS_MAIL --redirect
+  #sudo certbot certonly --standalone --agree-tos --no-eff-email -d $HTTPS_DOMAIN -d www.$HTTPS_DOMAIN -m $HTTPS_MAIL --redirect --config-dir letsencrypt/config --logs-dir letsencrypt/logs --work-dir letsencrypt/work
+  # Change user rights root -> pi
+  #sudo chown -R pi:pi letsencrypt/config/archive
+  #sudo chown -R pi:pi letsencrypt/config/live
+  # Set rights for others
+  #sudo chmod -R go+rx letsencrypt/config/archive
+  #sudo chmod -R go+rx letsencrypt/config/live
+
   # Create cronjob
   #(crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
 fi

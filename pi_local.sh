@@ -9,18 +9,20 @@ function get_config {
   HTTPS=false
   HTTPS_DOMAIN=
   HTTPS_MAIL=
+  HTTPS_PORT=
 
-  read -p "PI-HOST: " HOST
-  read -p "PI-PORT: " PORT
-  # https://github.com/sorax/hausgedacht
+  read -p "pi ssh host: " PI_HOST
+  read -p "pi ssh port: " PI_PORT
   read -p "git repo url: " GIT_URL
+  read -p "http port (e.g. 80): " HTTP_PORT
 
   read -p "Use https? [Yn]" -n 1
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     HTTPS=true
     echo ""
-    read -p "Domain: " HTTPS_DOMAIN
-    read -p "E-Mail: " HTTPS_MAIL
+    read -p "https domain: " HTTPS_DOMAIN
+    read -p "host mail: " HTTPS_MAIL
+    read -p "https port (e.g. 443): " HTTPS_PORT
   fi
   read -p "SECRET_KEY_BASE: (e.g. use mix phx.gen.secret)" SECRET_KEY_BASE
 }
@@ -29,12 +31,14 @@ function store_config {
   echo "Storing config"
   mkdir -p data
 /bin/cat <<EOM >$CONFIG
-HOST=$HOST
-PORT=$PORT
+PI_HOST=$PI_HOST
+PI_PORT=$PI_PORT
 GIT_URL=$GIT_URL
+HTTP_PORT=$HTTP_PORT
 HTTPS=$HTTPS
 HTTPS_DOMAIN=$HTTPS_DOMAIN
 HTTPS_MAIL=$HTTPS_MAIL
+HTTPS_PORT=$HTTPS_PORT
 SECRET_KEY_BASE=$SECRET_KEY_BASE
 CUR_VERSION=NONE
 EOM
@@ -51,16 +55,16 @@ function setup_remote {
   echo "Type in: raspberry"
   echo "#############################"
 
-  ssh-copy-id -p $PORT pi@$HOST
-  ssh -T -p $PORT pi@$HOST sudo passwd -l pi
+  ssh-copy-id -p $PI_PORT pi@$PI_HOST
+  ssh -T -p $PI_PORT pi@$PI_HOST sudo passwd -l pi
 
-  scp -P $PORT $CONFIG pi@$HOST:/home/pi
-  scp -P $PORT pi_remote.sh pi@$HOST:/home/pi
-  scp -P $PORT pull.sh pi@$HOST:/home/pi
-  ssh -T -p $PORT pi@$HOST chmod +x pi_remote.sh
-  ssh -T -p $PORT pi@$HOST chmod +x pull.sh
-  ssh -T -p $PORT pi@$HOST sudo apt install -y screen
-  ssh -T -p $PORT pi@$HOST screen -dmS Setup ./pi_remote.sh
+  scp -P $PI_PORT $CONFIG pi@$PI_HOST:/home/pi
+  scp -P $PI_PORT pi_remote.sh pi@$PI_HOST:/home/pi
+  scp -P $PI_PORT pull.sh pi@$PI_HOST:/home/pi
+  ssh -T -p $PI_PORT pi@$PI_HOST chmod +x pi_remote.sh
+  ssh -T -p $PI_PORT pi@$PI_HOST chmod +x pull.sh
+  ssh -T -p $PI_PORT pi@$PI_HOST sudo apt install -y screen
+  ssh -T -p $PI_PORT pi@$PI_HOST screen -dmS Setup ./pi_remote.sh
 }
 
 if [ ! -f "$CONFIG" ]; then

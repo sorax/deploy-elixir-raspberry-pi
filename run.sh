@@ -22,16 +22,13 @@ if [[ "$HTTPS" == "true" ]]; then
 fi
 
 # Shutdown old version or noop
-#~/releases/$CUR_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO stop || :
+$PI_HOME/releases/$CUR_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO stop || :
 
-# Migration
-#releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO rpc "${GIT_REPO^}.Release.migrate"
-#~/releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO eval "${GIT_REPO^}.Release.migrate"
+# Create database (if not exists)
+sudo -u postgres psql -c "CREATE DATABASE $GIT_REPO;"
+
+# Run database migrations
+$PI_HOME/releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO eval "${GIT_REPO^}.Release.migrate"
 
 # Start new version
-#releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO restart
-#releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon
-$PI_HOME/releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO start_iex
-
-# Update version in setup.cfg
-sed -i "/CUR_VERSION=.*/c\CUR_VERSION=$NEW_VERSION" setup.cfg
+$PI_HOME/releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon

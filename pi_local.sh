@@ -7,21 +7,20 @@ function get_config {
   echo ""
   # set defaults
   HTTPS=false
-  HTTPS_DOMAIN=
   HTTPS_MAIL=
   HTTPS_PORT=
 
   read -p "pi ssh host: " PI_HOST
   read -p "pi ssh port: " PI_PORT
   read -p "git repo url: " GIT_URL
+  read -p "domain: " DOMAIN
   read -p "http port (e.g. 80): " HTTP_PORT
 
   read -p "Use https? [Yn]" -n 1
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     HTTPS=true
     echo ""
-    read -p "https domain: " HTTPS_DOMAIN
-    read -p "host mail: " HTTPS_MAIL
+    read -p "https mail: " HTTPS_MAIL
     read -p "https port (e.g. 443): " HTTPS_PORT
   fi
   read -p "SECRET_KEY_BASE: (e.g. use mix phx.gen.secret)" SECRET_KEY_BASE
@@ -34,9 +33,9 @@ function store_config {
 PI_HOST=$PI_HOST
 PI_PORT=$PI_PORT
 GIT_URL=$GIT_URL
+DOMAIN=$DOMAIN
 HTTP_PORT=$HTTP_PORT
 HTTPS=$HTTPS
-HTTPS_DOMAIN=$HTTPS_DOMAIN
 HTTPS_MAIL=$HTTPS_MAIL
 HTTPS_PORT=$HTTPS_PORT
 SECRET_KEY_BASE=$SECRET_KEY_BASE

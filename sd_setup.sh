@@ -18,6 +18,8 @@ function get_config {
     echo "WLAN-Config"
     read -p "WLAN-SSID: " WLAN_SSID
     read -sp "Password: " WLAN_PASS
+  else
+    echo ""
   fi
 }
 

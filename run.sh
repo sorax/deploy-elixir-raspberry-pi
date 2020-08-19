@@ -15,10 +15,10 @@ export HTTP_PORT=$HTTP_PORT
 export HTTPS_PORT=$HTTPS_PORT
 export POOL_SIZE=10
 if [[ "$HTTPS" == "true" ]]; then
-  #export SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem
-  #export SSL_CERT_PATH=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
-  export SSL_KEY_PATH=$PI_HOME/letsencrypt/config/live/$HTTPS_DOMAIN/privkey.pem
-  export SSL_CERT_PATH=$PI_HOME/letsencrypt/config/live/$HTTPS_DOMAIN/fullchain.pem
+  export SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+  export SSL_CERT_PATH=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
+  #export SSL_KEY_PATH=$PI_HOME/letsencrypt/config/live/$HTTPS_DOMAIN/privkey.pem
+  #export SSL_CERT_PATH=$PI_HOME/letsencrypt/config/live/$HTTPS_DOMAIN/fullchain.pem
 fi
 
 # Shutdown old version or noop

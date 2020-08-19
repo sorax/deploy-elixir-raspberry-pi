@@ -60,8 +60,10 @@ function setup_remote {
   scp -P $PI_PORT $CONFIG pi@$PI_HOST:/home/pi
   scp -P $PI_PORT pi_remote.sh pi@$PI_HOST:/home/pi
   scp -P $PI_PORT pull.sh pi@$PI_HOST:/home/pi
+  scp -P $PI_PORT run.sh pi@$PI_HOST:/home/pi
   ssh -T -p $PI_PORT pi@$PI_HOST chmod +x pi_remote.sh
   ssh -T -p $PI_PORT pi@$PI_HOST chmod +x pull.sh
+  ssh -T -p $PI_PORT pi@$PI_HOST chmod +x run.sh
   ssh -T -p $PI_PORT pi@$PI_HOST sudo apt install -y screen
   ssh -T -p $PI_PORT pi@$PI_HOST screen -dmS Setup ./pi_remote.sh
 }

@@ -45,16 +45,9 @@ if [[ "$HTTPS" == "true" ]]; then
   # Create https certificate
   sudo apt install -y certbot
   sudo certbot certonly --standalone --agree-tos --no-eff-email -d $DOMAIN -d www.$DOMAIN -m $HTTPS_MAIL --redirect
-  #sudo certbot certonly --standalone --agree-tos --no-eff-email -d $DOMAIN -d www.$DOMAIN -m $HTTPS_MAIL --redirect --config-dir letsencrypt/config --logs-dir letsencrypt/logs --work-dir letsencrypt/work
-  # Change user rights root -> pi
-  #sudo chown -R pi:pi letsencrypt/config/archive
-  #sudo chown -R pi:pi letsencrypt/config/live
-  # Set rights for others
-  #sudo chmod -R go+rx letsencrypt/config/archive
-  #sudo chmod -R go+rx letsencrypt/config/live
 
   # Create cronjob
-  #(crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
+  (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
 fi
 
 # Create cronjob

@@ -1,10 +1,10 @@
-# Raspbian Elixir Phoenix
+# Run Elixir on Raspberry Pi
 
-## Setup for a raspberry pi with elixir &amp; phoenix
+## Setup for a Raspberry Pi with Elixir &amp; Phoenix
 
 1. Flash SD card
 
-- Download [Raspbian Lite](https://downloads.raspberrypi.org/raspbian_lite_latest)
+- Download [Raspberry Pi OS (32-bit) Lite](https://downloads.raspberrypi.org/raspios_lite_armhf_latest)
 - Unzip downloaded file
 - Flash .img on sd-card (e.g. with [balenaEtcher](https://www.balena.io/etcher/))
 
@@ -16,11 +16,6 @@
 
 3. Insert SD card into Raspberry Pi and power on
 
-4. Configure access & upload remote-script
+4. Configure & setup Raspberry Pi
 
 - `./pi_local.sh`
-
-5. Execute remote-script
-
-- `ssh -p PORT pi@HOST`
-- `screen -dm ./pi_remote.sh`

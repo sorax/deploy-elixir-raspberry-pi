@@ -44,7 +44,7 @@ mkdir -p releases
 if [[ "$HTTPS" == "true" ]]; then
   # Create https certificate
   sudo apt install -y certbot
-  sudo certbot certonly --standalone --agree-tos --no-eff-email -d $DOMAIN -d www.$DOMAIN -m $HTTPS_MAIL --redirect
+  sudo certbot certonly -n --standalone --agree-tos --http-01-port $CERTBOT_HTTP_PORT --https-port $CERTBOT_HTTPS_PORT -d $DOMAINS,www.${DOMAINS/,/,www.} -m $HTTPS_MAIL
 
   # Create cronjob
   (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -

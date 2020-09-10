@@ -9,11 +9,13 @@ function get_config {
   HTTPS=false
   HTTPS_MAIL=
   HTTPS_PORT=
+  CERTBOT_HTTP_PORT=8080
+  CERTBOT_HTTPS_PORT=8443
 
   read -p "pi ssh host: " PI_HOST
   read -p "pi ssh port: " PI_PORT
   read -p "git repo url: " GIT_URL
-  read -p "domain: " DOMAIN
+  read -p "domains (comma separated): " DOMAINS
   read -p "http port (e.g. 80): " HTTP_PORT
 
   read -p "Use https? [Yn]" -n 1
@@ -33,11 +35,13 @@ function store_config {
 PI_HOST=$PI_HOST
 PI_PORT=$PI_PORT
 GIT_URL=$GIT_URL
-DOMAIN=$DOMAIN
+DOMAINS=$DOMAINS
 HTTP_PORT=$HTTP_PORT
 HTTPS=$HTTPS
 HTTPS_MAIL=$HTTPS_MAIL
 HTTPS_PORT=$HTTPS_PORT
+CERTBOT_HTTP_PORT=$CERTBOT_HTTP_PORT
+CERTBOT_HTTPS_PORT=$CERTBOT_HTTPS_PORT
 SECRET_KEY_BASE=$SECRET_KEY_BASE
 CUR_VERSION=NONE
 EOM

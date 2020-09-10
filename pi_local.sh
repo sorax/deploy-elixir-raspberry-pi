@@ -9,8 +9,8 @@ function get_config {
   HTTPS=false
   HTTPS_MAIL=
   HTTPS_PORT=
-  CERTBOT_HTTP_PORT=8080
-  CERTBOT_HTTPS_PORT=8443
+  CERTBOT_HTTP_PORT=
+  CERTBOT_HTTPS_PORT=
 
   read -p "pi ssh host: " PI_HOST
   read -p "pi ssh port: " PI_PORT
@@ -24,6 +24,8 @@ function get_config {
     echo ""
     read -p "https mail: " HTTPS_MAIL
     read -p "https port (e.g. 443): " HTTPS_PORT
+    read -p "certbot http port (e.g. 8080): " CERTBOT_HTTP_PORT
+    read -p "certbot https port (e.g. 8443): " CERTBOT_HTTPS_PORT
   fi
   read -p "SECRET_KEY_BASE: (e.g. use mix phx.gen.secret)" SECRET_KEY_BASE
 }

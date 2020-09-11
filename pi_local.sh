@@ -5,29 +5,32 @@ CONFIG=data/setup.cfg
 function get_config {
   echo "No config present. I need to ask a few things."
   echo ""
-  # set defaults
-  HTTPS=false
-  HTTPS_MAIL=
-  HTTPS_PORT=
-  CERTBOT_HTTP_PORT=
-  CERTBOT_HTTPS_PORT=
 
   read -p "pi ssh host: " PI_HOST
-  read -p "pi ssh port: " PI_PORT
+  read -p "pi ssh port [22]: " PI_PORT
+  PI_PORT=${PI_PORT:-22}
   read -p "git repo url: " GIT_URL
   read -p "domains (comma separated): " DOMAINS
-  read -p "http port (e.g. 80): " HTTP_PORT
+  read -p "http port [80]:" HTTP_PORT
+  HTTP_PORT=${HTTP_PORT:-80}
 
   read -p "Use https? [Yn]" -n 1
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     HTTPS=true
     echo ""
     read -p "https mail: " HTTPS_MAIL
-    read -p "https port (e.g. 443): " HTTPS_PORT
+    read -p "https port [443]: " HTTPS_PORT
+    HTTPS_PORT=${HTTPS_PORT:-443}
     read -p "certbot http port (e.g. 8080): " CERTBOT_HTTP_PORT
+    CERTBOT_HTTP_PORT=${CERTBOT_HTTP_PORT:-8080}
     read -p "certbot https port (e.g. 8443): " CERTBOT_HTTPS_PORT
+    CERTBOT_HTTPS_PORT=${CERTBOT_HTTPS_PORT:-8443}
+  else
+    HTTPS=false
+    HTTPS_MAIL=
   fi
-  read -p "SECRET_KEY_BASE: (e.g. use mix phx.gen.secret)" SECRET_KEY_BASE
+
+  read -p "SECRET_KEY_BASE (e.g. use mix phx.gen.secret): " SECRET_KEY_BASE
 }
 
 function store_config {

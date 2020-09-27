@@ -21,9 +21,9 @@ function get_config {
     read -p "https mail: " HTTPS_MAIL
     read -p "https port [443]: " HTTPS_PORT
     HTTPS_PORT=${HTTPS_PORT:-443}
-    read -p "certbot http port (e.g. 8080): " CERTBOT_HTTP_PORT
+    read -p "certbot http port [8080]: " CERTBOT_HTTP_PORT
     CERTBOT_HTTP_PORT=${CERTBOT_HTTP_PORT:-8080}
-    read -p "certbot https port (e.g. 8443): " CERTBOT_HTTPS_PORT
+    read -p "certbot https port [8443]: " CERTBOT_HTTPS_PORT
     CERTBOT_HTTPS_PORT=${CERTBOT_HTTPS_PORT:-8443}
   else
     HTTPS=false

@@ -9,16 +9,6 @@ function get_config {
   read -p "pi ssh host: " HOST
   read -p "git repo url: " GIT_URL
   read -p "domains (comma separated): " DOMAINS
-
-  read -p "Use https? [Yn]" -n 1
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    HTTPS=true
-    echo ""
-  else
-    HTTPS=false
-    HTTPS_MAIL=
-  fi
-
   read -p "certbot mail: " CERTBOT_MAIL
   read -p "SECRET_KEY_BASE (e.g. use mix phx.gen.secret): " SECRET_KEY_BASE
 }
@@ -30,7 +20,6 @@ function store_config {
 HOST=$HOST
 GIT_URL=$GIT_URL
 DOMAINS=$DOMAINS
-HTTPS=$HTTPS
 CERTBOT_HTTP_PORT=8080
 CERTBOT_HTTPS_PORT=8443
 CERTBOT_MAIL=$CERTBOT_MAIL

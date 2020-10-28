@@ -3,9 +3,8 @@
 CONFIG=data/setup.cfg
 
 function get_config {
-  echo "No config present. I need to ask a few things."
   echo ""
-
+  echo "No config present. I need to ask a few things."
   read -p "pi ssh host: " HOST
   read -p "git repo url: " GIT_URL
   read -p "domains (comma separated): " DOMAINS
@@ -34,10 +33,12 @@ function load_config {
 }
 
 function setup_remote {
+  echo ""
   echo "#############################"
   echo "When asked for a password"
   echo "Type in: raspberry"
   echo "#############################"
+  echo ""
 
   ssh-copy-id pi@$HOST
   ssh -T pi@$HOST sudo passwd -l pi

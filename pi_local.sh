@@ -18,7 +18,6 @@ function get_config {
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     HTTPS=true
     echo ""
-    read -p "https mail: " HTTPS_MAIL
     read -p "https port [443]: " HTTPS_PORT
     HTTPS_PORT=${HTTPS_PORT:-443}
     read -p "certbot http port [8080]: " CERTBOT_HTTP_PORT
@@ -30,6 +29,7 @@ function get_config {
     HTTPS_MAIL=
   fi
 
+  read -p "certbot mail: " CERTBOT_MAIL
   read -p "SECRET_KEY_BASE (e.g. use mix phx.gen.secret): " SECRET_KEY_BASE
 }
 
@@ -43,10 +43,10 @@ GIT_URL=$GIT_URL
 DOMAINS=$DOMAINS
 HTTP_PORT=$HTTP_PORT
 HTTPS=$HTTPS
-HTTPS_MAIL=$HTTPS_MAIL
 HTTPS_PORT=$HTTPS_PORT
 CERTBOT_HTTP_PORT=$CERTBOT_HTTP_PORT
 CERTBOT_HTTPS_PORT=$CERTBOT_HTTPS_PORT
+CERTBOT_MAIL=$CERTBOT_MAIL
 SECRET_KEY_BASE=$SECRET_KEY_BASE
 CUR_VERSION=NONE
 EOM

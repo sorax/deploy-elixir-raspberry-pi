@@ -6,7 +6,7 @@ function get_config {
   echo "No config present. I need to ask a few things."
   echo ""
 
-  read -p "pi ssh host: " PI_HOST
+  read -p "pi ssh host: " HOST
   read -p "git repo url: " GIT_URL
   read -p "domains (comma separated): " DOMAINS
 
@@ -27,7 +27,7 @@ function store_config {
   echo "Storing config"
   mkdir -p data
 /bin/cat <<EOM >$CONFIG
-PI_HOST=$PI_HOST
+HOST=$HOST
 GIT_URL=$GIT_URL
 DOMAINS=$DOMAINS
 HTTPS=$HTTPS

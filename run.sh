@@ -11,8 +11,8 @@ GIT_REPO=${GIT_URL##*/}
 export DATABASE_URL=ecto://postgres:postgres@localhost/$GIT_REPO
 export SECRET_KEY_BASE=$SECRET_KEY_BASE
 export HOST=$DOMAIN
-export HTTP_PORT=$HTTP_PORT
-export HTTPS_PORT=$HTTPS_PORT
+export HTTP_PORT=80
+export HTTPS_PORT=443
 export POOL_SIZE=10
 if [[ "$HTTPS" == "true" ]]; then
   export SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem

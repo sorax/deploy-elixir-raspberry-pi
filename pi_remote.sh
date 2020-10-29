@@ -28,8 +28,8 @@ asdf install erlang latest
 asdf install elixir latest
 
 # Set asdf global versions
-asdf global erlang 23.0.3
-asdf global elixir 1.10.4-otp-23
+asdf global erlang 23.1.1
+asdf global elixir 1.11.1-otp-23
 
 # Start postgres
 sudo systemctl start postgresql

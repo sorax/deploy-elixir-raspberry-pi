@@ -12,7 +12,8 @@ sudo apt install -y build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3
 sudo apt install -y git inotify-tools postgresql
 
 # Install asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0-rc1
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+
 
 # Add to shell
 echo -e "\n# Add asdf bash completions" >> ~/.bashrc

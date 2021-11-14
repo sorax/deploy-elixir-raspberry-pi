@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. setup.cfg
+# . setup.cfg
 
 # Update & upgrade system
 sudo apt update && sudo apt upgrade -y

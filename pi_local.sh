@@ -7,8 +7,8 @@ function get_config {
   echo "No config present. I need to ask a few things."
   read -p "pi ssh host: " HOST
   read -p "git repo url: " GIT_URL
-  read -p "certbot mail: " CERTBOT_MAIL
   read -p "domain: " DOMAIN
+  #read -p "certbot mail: " CERTBOT_MAIL
   read -p "SECRET_KEY_BASE (e.g. use mix phx.gen.secret): " SECRET_KEY_BASE
 }
 
@@ -18,12 +18,10 @@ function store_config {
 /bin/cat <<EOM >$CONFIG
 HOST=$HOST
 GIT_URL=$GIT_URL
-CERTBOT_HTTP_PORT=8080
-CERTBOT_HTTPS_PORT=8443
-CERTBOT_MAIL=$CERTBOT_MAIL
 DOMAIN=$DOMAIN
+HTTP_PORT=8080
+HTTPS_PORT=8443
 SECRET_KEY_BASE=$SECRET_KEY_BASE
-CUR_VERSION=NONE
 EOM
 }
 

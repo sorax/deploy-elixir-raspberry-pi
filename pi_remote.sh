@@ -44,8 +44,9 @@ sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 mix local.hex --force
 mix local.rebar --force
 
-# Create directories
-mkdir -p releases
+# Create folders
+mkdir -p blue
+mkdir -p green
 
 # Create https certificate
 sudo apt install -y certbot

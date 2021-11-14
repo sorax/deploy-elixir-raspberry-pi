@@ -25,6 +25,10 @@ echo ". \$HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
 # Add asdf plugins
 asdf plugin add erlang
 asdf plugin add elixir
+
+export KERL_CONFIGURE_OPTIONS="--without-wx"
+
+# Install asdf plugins
 asdf install erlang latest
 asdf install elixir latest
 

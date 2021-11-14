@@ -48,9 +48,10 @@ mix local.rebar --force
 mkdir -p blue
 mkdir -p green
 
-# Create https certificate
-sudo apt install -y certbot
-sudo certbot certonly -n --standalone --agree-tos --tls-sni-01-port $CERTBOT_HTTPS_PORT --http-01-port $CERTBOT_HTTP_PORT -d $DOMAINS,www.${DOMAINS//,/,www.} -m $CERTBOT_MAIL
+# # Create https certificate
+# sudo apt install -y certbot
+# #sudo certbot certonly -n --standalone --agree-tos --tls-sni-01-port $CERTBOT_HTTPS_PORT --http-01-port $CERTBOT_HTTP_PORT -d $DOMAINS,www.${DOMAINS//,/,www.} -m $CERTBOT_MAIL
+# sudo certbot certonly -n --standalone --agree-tos -d $DOMAINS,www.${DOMAINS//,/,www.} -m $CERTBOT_MAIL
 
 # Create cronjob
 (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -

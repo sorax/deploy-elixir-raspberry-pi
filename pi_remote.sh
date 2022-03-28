@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# . setup.cfg
+export $(grep -v '^#' .env | xargs)
 
 # Update & upgrade system
 sudo apt update && sudo apt upgrade -y
@@ -26,8 +26,6 @@ echo ". \$HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
 asdf plugin add erlang
 asdf plugin add elixir
 
-export KERL_CONFIGURE_OPTIONS="--without-wx"
-
 # Install asdf plugins
 asdf install erlang latest
 asdf install elixir latest
@@ -38,15 +36,21 @@ asdf global elixir latest
 
 # Start postgres
 sudo systemctl start postgresql
+
+# Create user & database
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+sudo -u postgres psql -c "CREATE DATABASE $REPO;"
 
 # Install mix
 mix local.hex --force
 mix local.rebar --force
 
-# Create folders
-mkdir -p blue
-mkdir -p green
+# Clone Project
+git clone https://github.com/sorax/$REPO.git
+
+# Run latest version
+chmod +x run.sh
+./run.sh
 
 # # Create https certificate
 # sudo apt install -y certbot
@@ -55,6 +59,3 @@ mkdir -p green
 
 # # Create cronjob
 # (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
-
-# # Create cronjob
-# #(crontab -l ; echo "0 * * * * ./pull.sh") | crontab -

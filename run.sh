@@ -1,34 +1,52 @@
 #!/bin/bash
 
-PI_HOME=$1
-CUR_VERSION=$2
-NEW_VERSION=$3
+export $(grep -v '^#' .env | xargs)
 
-. $PI_HOME/setup.cfg
+case $INSTANCE in
+  green)
+    NEW_INSTANCE=blue
+    # export HTTP_PORT="$((HTTP_PORT + 2))"
+    # export HTTPS_PORT="$((HTTP_PORT + 2))"
+    ;;
 
-# Set env vars
-GIT_REPO=${GIT_URL##*/}
-export DATABASE_URL=ecto://postgres:postgres@localhost/$GIT_REPO
-export SECRET_KEY_BASE=$SECRET_KEY_BASE
-export HOST=$DOMAIN
-export HTTP_PORT=80
-export HTTPS_PORT=443
-export POOL_SIZE=10
-if [[ "$HTTPS" == "true" ]]; then
-  export SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem
-  export SSL_CERT_PATH=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
-  #export SSL_KEY_PATH=$PI_HOME/letsencrypt/config/live/$HTTPS_DOMAIN/privkey.pem
-  #export SSL_CERT_PATH=$PI_HOME/letsencrypt/config/live/$HTTPS_DOMAIN/fullchain.pem
-fi
+  *)
+    NEW_INSTANCE=green
+    # export HTTP_PORT="$((HTTP_PORT + 2))"
+    # export HTTPS_PORT="$((HTTP_PORT + 2))"
+    ;;
+esac
+
+cd $REPO
+
+# Cleanup repo
+git reset --hard
+git clean -df
+
+# Checkout latest version
+git pull --rebase
+
+# Initial setup
+mix deps.get --only prod
+mix compile
+
+# Compile assets
+mix assets.deploy
+
+# Build release
+mix release --overwrite --path "../$NEW_INSTANCE"
+
+cd ..
 
 # Shutdown old version or noop
-$PI_HOME/releases/$CUR_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO stop || :
+if [ "${INSTANCE}" != "" ] && [ -f "$INSTANCE/bin/$REPO" ]; then
+  $INSTANCE/bin/$REPO stop || :
+fi
 
-# Create database (if not exists)
-sudo -u postgres psql -c "CREATE DATABASE $GIT_REPO;"
+# Run DB migration
+$NEW_INSTANCE/bin/$REPO eval "${REPO^}.Release.migrate"
 
-# Run database migrations
-$PI_HOME/releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO eval "${GIT_REPO^}.Release.migrate"
+# Start the new server
+$NEW_INSTANCE/bin/$REPO daemon
 
-# Start new version
-$PI_HOME/releases/$NEW_VERSION/_build/prod/rel/$GIT_REPO/bin/$GIT_REPO daemon
+# Update version in .env file
+sed -i "/INSTANCE=.*/c\INSTANCE=$NEW_INSTANCE" .env

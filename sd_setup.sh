@@ -36,7 +36,7 @@ EOM
 
 function load_config {
   echo "Loading config"
-  . $1
+  source $1
 }
 
 function write_card {

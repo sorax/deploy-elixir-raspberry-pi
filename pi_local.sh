@@ -7,16 +7,19 @@ function get_config {
   echo "No config present. I need to ask a few things."
   read -p "pi ssh host: " PI_HOST
   read -p "repo name: " REPO
-  read -p "domain: " DOMAIN
-  read -p "certbot mail: " CERTBOT_MAIL
+  read -p "domains (comma seperated): " DOMAINS
+  read -p "certbot email: " CERTBOT_EMAIL
   read -p "SECRET_KEY_BASE (e.g. use mix phx.gen.secret): " SECRET_KEY_BASE
 }
 
 function store_config {
+  DOMAIN = "${DOMAINS%%,*}"
+
   echo "Storing config"
   mkdir -p data
 /bin/cat <<EOM >$CONFIG
-CERTBOT_MAIL=$CERTBOT_MAIL
+CERTBOT_DOMAINS=$DOMAINS
+CERTBOT_EMAIL=$CERTBOT_EMAIL
 DATABASE_URL=ecto://postgres:postgres@localhost/$REPO
 PI_HOST=$PI_HOST
 HTTP_PORT=8080

@@ -52,10 +52,9 @@ git clone https://github.com/sorax/$REPO.git
 chmod +x run.sh
 ./run.sh
 
-# # Create https certificate
-# sudo apt install -y certbot
-# #sudo certbot certonly -n --standalone --agree-tos --tls-sni-01-port $CERTBOT_HTTPS_PORT --http-01-port $CERTBOT_HTTP_PORT -d $DOMAINS,www.${DOMAINS//,/,www.} -m $CERTBOT_MAIL
-# sudo certbot certonly -n --standalone --agree-tos -d $DOMAINS,www.${DOMAINS//,/,www.} -m $CERTBOT_MAIL
+# Create https certificate
+sudo apt install -y certbot
+sudo certbot certonly -n --standalone --agree-tos --http-01-port $HTTP_PORT --https-port $HTTPS_PORT -d $CERTBOT_DOMAINS,www.${CERTBOT_DOMAINS//,/,www.} -m $CERTBOT_EMAIL
 
-# # Create cronjob
+# Create cronjob
 # (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -

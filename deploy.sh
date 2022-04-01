@@ -2,20 +2,20 @@
 
 export $(grep -v '^#' .env | xargs)
 
-DEFAULT_HTTP_PORT=$HTTP_PORT
-DEFAULT_HTTPS_PORT=$HTTPS_PORT
+# DEFAULT_HTTP_PORT=$HTTP_PORT
+# DEFAULT_HTTPS_PORT=$HTTPS_PORT
 
 case $INSTANCE in
   green)
     NEW_INSTANCE=blue
-    export HTTP_PORT="$((HTTP_PORT + 2))"
-    export HTTPS_PORT="$((HTTPS_PORT + 2))"
+    # export HTTP_PORT="$((HTTP_PORT + 2))"
+    # export HTTPS_PORT="$((HTTPS_PORT + 2))"
     ;;
 
   *)
     NEW_INSTANCE=green
-    export HTTP_PORT="$((HTTP_PORT + 1))"
-    export HTTPS_PORT="$((HTTPS_PORT + 1))"
+    # export HTTP_PORT="$((HTTP_PORT + 1))"
+    # export HTTPS_PORT="$((HTTPS_PORT + 1))"
     ;;
 esac
 
@@ -47,11 +47,11 @@ $NEW_INSTANCE/bin/$REPO eval "${REPO^}.Release.migrate"
 $NEW_INSTANCE/bin/$REPO daemon
 
 # Switch Ports
-iptables -t nat -R PREROUTING 1 -p tcp --dport $DEFAULT_HTTP_PORT -j REDIRECT --to-port $HTTP_PORT
-iptables -t nat -R PREROUTING 2 -p tcp --dport $DEFAULT_HTTPS_PORT -j REDIRECT --to-port $HTTPS_PORT
-iptables -t nat -R OUTPUT 1 -o lo -p tcp --dport $DEFAULT_HTTP_PORT -j REDIRECT --to-port $HTTP_PORT
-iptables -t nat -R OUTPUT 2 -o lo -p tcp --dport $DEFAULT_HTTPS_PORT -j REDIRECT --to-port $HTTPS_PORT
-iptables-save
+# iptables -t nat -R PREROUTING 1 -p tcp --dport $DEFAULT_HTTP_PORT -j REDIRECT --to-port $HTTP_PORT
+# iptables -t nat -R PREROUTING 2 -p tcp --dport $DEFAULT_HTTPS_PORT -j REDIRECT --to-port $HTTPS_PORT
+# iptables -t nat -R OUTPUT 1 -o lo -p tcp --dport $DEFAULT_HTTP_PORT -j REDIRECT --to-port $HTTP_PORT
+# iptables -t nat -R OUTPUT 2 -o lo -p tcp --dport $DEFAULT_HTTPS_PORT -j REDIRECT --to-port $HTTPS_PORT
+# iptables-save
 
 # Shutdown old version or noop
 if [ "${INSTANCE}" != "" ] && [ -f "$INSTANCE/bin/$REPO" ]; then

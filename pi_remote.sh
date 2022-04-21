@@ -46,11 +46,11 @@ mix local.hex --force
 mix local.rebar --force
 
 # Create https certificate
-sudo apt install -y certbot
-sudo certbot certonly -n --standalone --agree-tos --http-01-port $HTTP_PORT --https-port $HTTPS_PORT -d $CERTBOT_DOMAINS,www.${CERTBOT_DOMAINS//,/,www.} -m $CERTBOT_EMAIL
+# sudo apt install -y certbot
+# sudo certbot certonly -n --standalone --agree-tos --http-01-port $HTTP_PORT --https-port $HTTPS_PORT -d $CERTBOT_DOMAINS,www.${CERTBOT_DOMAINS//,/,www.} -m $CERTBOT_EMAIL
 
 # Make certs readable by user `pi`
-sudo chmod 0755 -R /etc/letsencrypt/{live,archive}
+# sudo chmod 0755 -R /etc/letsencrypt/{live,archive}
 
 # Create cronjob
 # (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -

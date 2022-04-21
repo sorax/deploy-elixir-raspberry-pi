@@ -37,6 +37,15 @@ asdf global elixir latest
 # Start postgres
 sudo systemctl start postgresql
 
+# Install Dart-Sass
+wget https://storage.googleapis.com/dart-archive/channels/stable/release/2.16.2/sdk/dartsdk-linux-arm64-release.zip
+unzip dartsdk-linux-arm64-release.zip
+echo -e "\n# Add dart & sass to path" >> ~/.bashrc
+echo "export PATH=\$HOME/.pub-cache/bin:\$HOME/dart-sdk/bin:\$PATH" >> ~/.bashrc
+. ~/.bashrc
+dart --disable-analytics
+dart pub global activate sass
+
 # Create user & database
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE $REPO;"
@@ -59,5 +68,5 @@ mix local.rebar --force
 git clone https://github.com/sorax/$REPO.git
 
 # Run latest version
-chmod +x run.sh
-./run.sh
+# chmod +x run.sh
+# ./run.sh

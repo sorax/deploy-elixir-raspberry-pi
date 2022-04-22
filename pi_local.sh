@@ -13,7 +13,7 @@ function get_config {
 }
 
 function store_config {
-  DOMAIN = "${DOMAINS%%,*}"
+  DOMAIN="${DOMAINS%%,*}"
 
   echo "Storing config"
   mkdir -p data

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG=data/sd_card.cfg
+CONFIG=config/sd_card.cfg
 
 function get_config {
   echo "No config present. I need to ask a few things."

@@ -67,6 +67,9 @@ mix local.rebar --force
 # Clone Project
 git clone https://github.com/sorax/$REPO.git
 
+# Create cronjob
+# (crontab -l ; echo "@reboot ./run.sh") | crontab -
+
 # Run latest version
-# chmod +x run.sh
-# ./run.sh
+chmod +x run.sh
+./run.sh

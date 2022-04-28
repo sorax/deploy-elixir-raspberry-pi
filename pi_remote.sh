@@ -46,7 +46,7 @@ echo -e "\n# Add dart & sass to path" >> ~/.bashrc
 echo "export PATH=\$HOME/.pub-cache/bin:\$HOME/dart-sdk/bin:\$PATH" >> ~/.bashrc
 . ~/.bashrc
 dart --disable-analytics
-dart pub global activate sass
+dart pub global activate sass 1.49.11
 
 # Create user & database
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"

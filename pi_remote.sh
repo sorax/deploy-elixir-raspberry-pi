@@ -70,7 +70,7 @@ sudo chmod 0755 -R /etc/letsencrypt/{live,archive}
 git clone https://github.com/sorax/$REPO.git
 
 # Create cronjob
-# (crontab -l ; echo "@reboot ./run.sh") | crontab -
+(crontab -l ; echo "@reboot ./deploy.sh") | crontab -
 
 # Reboot
 sudo reboot

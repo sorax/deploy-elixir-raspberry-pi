@@ -16,13 +16,17 @@ sudo apt install -y postgresql
 # Install asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
 
-# Add to shell
-echo -e "\n# Add asdf bash completions" >> ~/.bashrc
-echo ". \$HOME/.asdf/asdf.sh" >> ~/.bashrc
-echo ". \$HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
-. ~/.bashrc
+# Add asdf & dart/sass to shell
+sed -i '1i\
+# Add asdf bash completions\
+. \$HOME/.asdf/asdf.sh\
+. \$HOME/.asdf/completions/asdf.bash\
+\
+# Add dart & sass to path\
+export PATH=\$HOME/.pub-cache/bin:\$HOME/dart-sdk/bin:\$PATH\
+' .bashrc
 
-# looks like we need to reboot here
+. ~/.bashrc
 
 # Add asdf plugins
 asdf plugin add erlang
@@ -42,9 +46,6 @@ sudo systemctl start postgresql
 # Install Dart-Sass
 wget https://storage.googleapis.com/dart-archive/channels/stable/release/2.16.2/sdk/dartsdk-linux-arm64-release.zip
 unzip dartsdk-linux-arm64-release.zip
-echo -e "\n# Add dart & sass to path" >> ~/.bashrc
-echo "export PATH=\$HOME/.pub-cache/bin:\$HOME/dart-sdk/bin:\$PATH" >> ~/.bashrc
-. ~/.bashrc
 dart --disable-analytics
 dart pub global activate sass 1.49.11
 

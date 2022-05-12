@@ -10,6 +10,10 @@ function get_config {
   read -p "domains (comma seperated): " DOMAINS
   read -p "certbot email: " CERTBOT_EMAIL
   read -p "SECRET_KEY_BASE (e.g. use mix phx.gen.secret): " SECRET_KEY_BASE
+  read -p "smtp server: " SMTP_SERVER
+  read -p "smtp port: " SMTP_PORT
+  read -p "smtp username: " SMTP_USERNAME
+  read -p "smtp password: " SMTP_PASSWORD
 }
 
 function store_config {
@@ -32,6 +36,10 @@ PI_HOST=$PI_HOST
 POOL_SIZE=10
 REPO=$REPO
 SECRET_KEY_BASE=$SECRET_KEY_BASE
+SMTP_PASSWORD=$SMTP_PASSWORD
+SMTP_PORT=$SMTP_PORT
+SMTP_SERVER=$SMTP_SERVER
+SMTP_USERNAME=$SMTP_USERNAME
 SSL_CERT_PATH=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
 SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem
 EOM

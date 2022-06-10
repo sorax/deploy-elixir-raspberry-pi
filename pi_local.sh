@@ -41,6 +41,7 @@ SMTP_SERVER=$SMTP_SERVER
 SMTP_USERNAME=$SMTP_USERNAME
 SSL_CERT_PATH=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
 SSL_KEY_PATH=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+STORAGE_PATH=/home/pi/uploads
 EOM
 }
 

@@ -36,7 +36,7 @@ mix compile
 mix assets.deploy
 
 # Build release
-mix release --overwrite --path "../$NEW_INSTANCE"
+mix release $REPO --overwrite --path "../$NEW_INSTANCE"
 
 cd ..
 

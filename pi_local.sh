@@ -31,6 +31,7 @@ INSTANCE=
 KERL_CONFIGURE_OPTIONS="--without-wx"
 MIX_ENV=prod
 MIX_SASS_PATH=/home/pi/.pub-cache/bin/sass
+PHX_SERVER=true
 PI_HOST=$PI_HOST
 POOL_SIZE=10
 REPO=$REPO

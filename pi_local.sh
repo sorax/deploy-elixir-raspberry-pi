@@ -22,6 +22,7 @@ function store_config {
   echo "Storing config"
   mkdir -p data
 /bin/cat <<EOM >$CONFIG
+DOMAINS=$DOMAINS
 CERTBOT_DOMAINS=$DOMAINS
 CERTBOT_EMAIL=$CERTBOT_EMAIL
 DATABASE_URL=ecto://postgres:postgres@localhost/$REPO

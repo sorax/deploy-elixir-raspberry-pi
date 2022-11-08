@@ -25,7 +25,7 @@ function get_config {
 
 function store_config {
   echo "Storing config"
-  mkdir -p data
+  mkdir -p config
 /bin/cat <<EOM >$CONFIG
 VOLUME=$VOLUME
 NETWORK=$NETWORK

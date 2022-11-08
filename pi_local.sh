@@ -20,7 +20,7 @@ function store_config {
   DOMAIN="${DOMAINS%%,*}"
 
   echo "Storing config"
-  mkdir -p data
+  mkdir -p config
 /bin/cat <<EOM >$CONFIG
 DOMAINS=$DOMAINS
 CERTBOT_DOMAINS=$DOMAINS

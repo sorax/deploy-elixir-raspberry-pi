@@ -6,6 +6,7 @@ function get_config {
   echo ""
   echo "No config present. I need to ask a few things."
   read -p "pi ssh host: " PI_HOST
+  read -p "git user: " USER
   read -p "repo name: " REPO
   read -p "domains (comma seperated): " DOMAINS
   read -p "certbot email: " CERTBOT_EMAIL
@@ -35,6 +36,7 @@ MIX_SASS_PATH=/home/pi/.pub-cache/bin/sass
 PHX_SERVER=true
 PI_HOST=$PI_HOST
 POOL_SIZE=10
+USER=$USER
 REPO=$REPO
 SECRET_KEY_BASE=$SECRET_KEY_BASE
 SMTP_PASSWORD=$SMTP_PASSWORD

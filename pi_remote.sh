@@ -67,7 +67,7 @@ sudo chmod 0755 -R /etc/letsencrypt/{live,archive}
 # (crontab -l ; echo "14 04 * * * sudo certbot renew") | crontab -
 
 # Clone Project
-git clone https://github.com/sorax/$REPO.git
+git clone https://github.com/$USER/$REPO.git
 
 # Create cronjob
 (crontab -l ; echo "@reboot ./deploy.sh") | crontab -

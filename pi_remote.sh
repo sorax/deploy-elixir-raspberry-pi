@@ -11,7 +11,6 @@ sudo apt autoremove --purge -y && sudo apt autoclean -y
 sudo apt install -y git
 sudo apt install -y build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
 sudo apt install -y postgresql
-# sudo apt install -y inotify-tools
 
 # Install asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
@@ -26,7 +25,7 @@ sed -i '1i\
 export PATH=\$HOME/.pub-cache/bin:\$HOME/dart-sdk/bin:\$PATH\
 ' .bashrc
 
-. ~/.bashrc
+source ~/.bashrc
 
 # Add asdf plugins
 asdf plugin add erlang
